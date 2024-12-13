@@ -1,7 +1,5 @@
 package heap;
 
-import java.util.Iterator;
-
 class MinHeap{
 	private int heapSize;
 	private int[] heap;
