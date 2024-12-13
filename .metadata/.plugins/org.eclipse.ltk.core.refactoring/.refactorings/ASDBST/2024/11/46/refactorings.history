@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;bst.NOde&apos; to &apos;Node&apos;&#x0D;&#x0A;- Original project: &apos;ASDBST&apos;&#x0D;&#x0A;- Original element: &apos;bst.NOde&apos;&#x0D;&#x0A;- Renamed element: &apos;bst.Node&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;NOde&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;bst{NOde.java[NOde" matchStrategy="1" name="Node" qualified="false" references="true" similarDeclarations="false" stamp="1731580577665" textual="false" version="1.0"/>
+</session>

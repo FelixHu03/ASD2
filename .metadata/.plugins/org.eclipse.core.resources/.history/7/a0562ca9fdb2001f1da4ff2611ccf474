@@ -1,0 +1,207 @@
+package rbt;
+class RBNode<AnyType>{
+    AnyType element;
+    RBNode<AnyType> parent;
+    RBNode<AnyType> left, right;
+    int color; //1 = red dan 0 = black
+}
+ 
+class RedBlackTree <AnyType extends Comparable <? super AnyType>>{
+    private RBNode<AnyType> root;
+    private RBNode<AnyType> TNULL;
+    public RedBlackTree() {
+        TNULL = new RBNode<AnyType>();
+        TNULL.color = 0;
+        TNULL.left = null;
+        TNULL.right = null;
+        root = TNULL;
+    }
+    //Rotasi Left
+    private void leftRotasi(RBNode<AnyType> x) {
+        RBNode<AnyType> y = x.right;
+        x.right = y.left;
+        if(y.left != TNULL) {
+            y.left.parent = x;
+        }
+        y.parent = x.parent;
+        if(x.parent == null) {
+            root = y;
+        }
+        else if (x == x.parent.left) {
+            x.parent.right = y;
+        }else {
+            x.parent.right = y;
+        }
+        y.left = x;
+        x.parent = y;
+        
+    }
+    //Rotasi Right
+    private void rightRotasi(RBNode<AnyType> x) {
+        RBNode<AnyType> y = x.left;
+        x.left = y.right;
+        if(y.right != TNULL) {
+            y.right.parent = x;
+        }
+        y.parent = x.parent;
+        if(x.parent == null) {
+            root = y;
+        }
+        else if (x == x.parent.right) {
+            x.parent.right = y;
+        }else {
+            x.parent.left = y;
+        }
+        y.right = x;
+        x.parent = y;
+    }
+    private void fixInsert(RBNode<AnyType> N) { //N = Node Baru
+        RBNode<AnyType> U;
+        while(N.parent.color == 1) {//parent = red
+            if(N.parent == N.parent.parent.right) {//p = anak kanan dr GP
+                U = N.parent.parent.left; // uncle color adalah red
+                if(U.color == 1) { //uncle color adalah red
+                    //Keadaan 2 : parent = red dan uncle = red
+                    //Flip Color : parent = uncle = 0/Black dan GP =1/Red
+                    U.color=0;
+                    N.parent.color=0;
+                    N.parent.parent.color = 1;
+                    N = N.parent.parent;
+                }
+                else { //uncle adalah black (0)
+                    // Keadaan 3B
+                    if(N == N.parent.right) { // N = Anak Kanan dari Parent
+                        // Flip Color : p = black/0 dan gp = red/1
+                        N.parent.color = 0;
+                        N.parent.parent.color = 1;
+                        leftRotasi(N.parent.parent);
+                    }
+                    // Keadaan 3C
+                    else if (N == N.parent.left) { // N = anak kiri dari parent
+                        N = N.parent;
+                        rightRotasi(N);
+                        N.parent.color = 0;
+                        N.parent.parent.color = 1;
+                        leftRotasi(N.parent.parent);
+                    }
+                }
+                
+            }
+            else{ // parent = anak kiri dari GP
+                U = N.parent.parent.right; // U = anak kanan dari GP
+                if(U.color == 1) { // uncle = red
+                    //Keadaan 2 : parent = red dan uncle = red
+                    //flip color : p = u = 0 dan GP = 1
+                    U.color = 0;
+                    N.parent.color=0;
+                    N.parent.parent.color = 1;
+                    N = N.parent.parent;
+                }
+                else {//uncle = black / null
+                    //Keadaan 3A
+                    if(N == N.parent.left) { //N = anak kiri dari P
+                        N.parent.color = 0;
+                        N.parent.parent.color = 1;
+                        rightRotasi(N.parent.parent);
+                    }
+                    //Keadaan 3B
+                    else if (N == N.parent.right) { //N = anak kanan dari P
+                        N = N.parent;
+                        leftRotasi(N);
+                        N.parent.color = 0;
+                        N.parent.parent.color = 1;
+                        rightRotasi(N.parent.parent);
+                    }
+                }
+            }
+            if(N == root) {
+                break;
+            }
+        }
+        root.color = 0;
+    }
+    public void insert(AnyType N) {
+        RBNode<AnyType> node = new RBNode<AnyType>();
+        node.parent = null;
+        node.element = N;
+        node.left = TNULL;
+        node.right = TNULL;
+        node.color = 1;
+        
+        RBNode<AnyType> y = null;
+        RBNode<AnyType> x = root;
+        while (x != TNULL) {
+            y = x;
+            if(node.element.compareTo(x.element) < 0) {
+                x = x.left;
+            }
+            else {
+                x = x.right;
+            }
+        }
+        node.parent = y;
+        if(y==null) {
+            root = node;
+        }
+        else if(node.element.compareTo(y.element)<0) {
+            y.left = node;
+        }
+        else {
+            y.right = node;
+        }
+        
+        //jika node baru adalah root
+        if(node.parent == null) {
+            node.color = 0;
+            return;
+        }
+        fixInsert(node);
+    }
+    private void inOrder (RBNode<AnyType> node){
+        if(node != TNULL) {
+            inOrder(node.left);
+            System.out.println(node.element + "");
+            inOrder(node.right);
+        }
+    }
+    public void inOrder() {
+        inOrder(root);
+    }
+    private void warnaNode(RBNode<AnyType> node) {
+        if(node != TNULL) {
+            String nodeColor = node.color == 1 ? "RED" : "BLACK";
+            System.out.println("Node " + node.element + "=" + nodeColor);
+            warnaNode(node.left);
+            warnaNode(node.right);
+        }
+    }
+    public void warnaNode() {
+        warnaNode(root);
+    }
+}
+ 
+public class Implementasi_RedBlackTree {
+ 
+    public static void main(String[] args) {
+ 
+        RedBlackTree<Integer> rb = new RedBlackTree<Integer>();
+        // Insert : 65,76,71,79,82,73,84,72,77
+        // Insert : 55, 80, 70, 90, 100, 85, 40, 60, 70, 30, 65, 25, 95, 98, 62 
+
+        rb.insert(65);
+        rb.insert(76);
+        rb.insert(71);
+        rb.insert(79);
+        rb.insert(82);
+        rb.insert(73);
+        rb.insert(84);
+        rb.insert(72);
+        rb.insert(77);
+        
+        System.out.println("InOrder : ");
+        rb.inOrder();
+        System.out.println("Warna Node : ");
+        rb.warnaNode();
+    }
+ 
+}
