@@ -125,17 +125,17 @@ public class MaxHeap {
         int n = Integer.parseInt(br.readLine());
 
         BinaryHeap_Max maxheap = new BinaryHeap_Max(n);
-        maxheap.insert_maxHeap(-1);
-        maxheap.insert_maxHeap(0);
-        maxheap.insert_maxHeap(1);
-        maxheap.insert_maxHeap(43);
-        maxheap.insert_maxHeap(3);
-        maxheap.insert_maxHeap(3);
+        maxheap.insert_maxHeap(10);
+        maxheap.insert_maxHeap(15);
+        maxheap.insert_maxHeap(20);
         maxheap.insert_maxHeap(2);
-        maxheap.insert_maxHeap(65);
-        maxheap.insert_maxHeap(58);
-        maxheap.insert_maxHeap(40);
-        maxheap.insert_maxHeap(42);
+        maxheap.insert_maxHeap(4);
+        maxheap.insert_maxHeap(1);
+        maxheap.insert_maxHeap(30);
+        maxheap.insert_maxHeap(14);
+        maxheap.insert_maxHeap(50);
+        maxheap.insert_maxHeap(60);
+//        maxheap.insert_maxHeap(42);
         maxheap.printHeap();
 
         maxheap.deleteMax();

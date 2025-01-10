@@ -42,4 +42,5 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="rbt.RedBlackTree"/>
     <fullyQualifiedTypeName name="heap.MinHeap"/>
+    <fullyQualifiedTypeName name="heap.HeapMin"/>
 </qualifiedTypeNameHistroy>

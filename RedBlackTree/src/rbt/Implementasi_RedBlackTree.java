@@ -187,20 +187,13 @@ public class Implementasi_RedBlackTree {
         RedBlackTree rb = new RedBlackTree();
 
         // Penyisipan elemen
-        rb.insert(55);
-        rb.insert(80);
-        rb.insert(70);
-        rb.insert(90);
-        rb.insert(100);
-        rb.insert(85);
-        rb.insert(40);
-        rb.insert(60);
-        rb.insert(70); // Duplikat
-        rb.insert(30);
-        rb.insert(65);
-        rb.insert(95);
-        rb.insert(98);
-        rb.insert(62);
+        rb.insert(8);
+        rb.insert(11);
+        rb.insert(5);
+        rb.insert(19);
+        rb.insert(12);
+        rb.insert(26);
+        rb.insert(7);
 
         // Menampilkan hasil
         System.out.println("InOrder : ");
